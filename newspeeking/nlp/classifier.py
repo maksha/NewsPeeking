@@ -1,5 +1,4 @@
-# newspeeking/nlp/classifier.py
-
+# Natural Language Processing (NLP) module for article classification.
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize

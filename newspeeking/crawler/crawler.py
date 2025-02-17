@@ -1,12 +1,10 @@
-# newspeeking/crawler/crawler.py
-
+# Web crawling logic for fetching and extracting data from news websites.
 from bs4 import BeautifulSoup
 import requests
 import validators
 import time
 import logging
 from typing import List, Optional, Dict
-# <--- Import urlparse from urllib.parse
 from urllib.parse import urljoin, urlparse
 
 from newspeeking.config import get_rate_limit_delay, get_categories, get_website_config, get_listing_page_config
@@ -22,8 +20,7 @@ def crawl_website(url: str, crawl_articles: bool = False) -> Optional[Dict | Lis
     If crawl_articles=False (default): Extracts and returns a list of article URLs from a listing page (if it's a listing page).
     If crawl_articles=True: Crawls individual articles from a listing page or a single article URL, extracts data, and classifies.
     """
-    domain = urlparse(
-        url).netloc  # <--- Use urllib.parse.urlparse instead of validators.urlparse
+    domain = urlparse(url).netloc  # Extract domain to get website-specific config
     # Get website-specific configurations
     website_config = get_website_config(domain)
     # Get website-specific rate limit delay
@@ -80,7 +77,7 @@ def extract_article_urls_from_listing_page(listing_url: str, website_config: Dic
         response = requests.get(listing_url, headers={
                                 'User-Agent': 'NewsCrawlerAPI/1.0'})
         response.raise_for_status()
-        # <--- Corrected: Use urllib.parse.urlparse
+        # Use website-specific rate limit for listing page
         time.sleep(get_rate_limit_delay(urlparse(listing_url).netloc))
 
         soup = BeautifulSoup(response.text, 'html.parser')

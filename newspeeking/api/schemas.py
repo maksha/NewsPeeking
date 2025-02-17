@@ -1,5 +1,4 @@
-# newspeeking/api/schemas.py
-
+# Pydantic schemas for API request and response data validation.
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 
@@ -22,5 +21,5 @@ class CrawlResponse(BaseModel):
     articles_crawled: int = 0
 
 
-class MessageResponse(BaseModel):
+class MessageResponse(BaseModel):  # New response model for reset_db
     message: str

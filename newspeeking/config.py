@@ -1,5 +1,4 @@
-# newspeeking/config.py
-
+# Configuration loading and management module.
 import yaml
 import logging
 
@@ -49,9 +48,7 @@ def get_website_config(domain: str):
 def get_rate_limit_delay(domain: str = None):
     """Returns the rate limit delay, website-specific if available, otherwise default."""
     website_cfg = get_website_config(domain) if domain else {}
-    default_config = get_default_config()  # Get default config
-    # Use default_config for fallback
-    return website_cfg.get('rate_limit_delay', default_config.get('rate_limit_delay', 1))
+    return website_cfg.get('rate_limit_delay', get_default_config().get('rate_limit_delay', 1))
 
 
 def get_categories():

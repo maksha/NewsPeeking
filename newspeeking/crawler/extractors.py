@@ -1,5 +1,4 @@
-# newspeeking/crawler/extractors.py
-
+# Functions for extracting article data from HTML content.
 from bs4 import BeautifulSoup
 from datetime import datetime
 import logging
@@ -58,6 +57,6 @@ def extract_article_data(url: str, html_content: str, website_config: Dict) -> D
     return {
         "headline": headline,
         "article_text": article_text,
-        "publication_date": publication_date if publication_date else None,
+        "publication_date": publication_date.isoformat() if publication_date else None,
         "author": author
     }

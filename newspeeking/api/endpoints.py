@@ -1,13 +1,14 @@
-# newspeeking/api/endpoints.py
-
+# FastAPI API endpoints for the NewsPeeking application.
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from typing import List, Optional
 import logging
 
+# Import MessageResponse
 from newspeeking.api.schemas import CrawlRequest, CrawlResponse, ArticleResponse, MessageResponse
-from newspeeking.crawler.crawler import crawl_website
+from newspeeking.crawler.crawler import crawl_website, crawl_articles_from_listing_page
 from newspeeking.db.database import get_db, Session, ArticleDB
+from typing import Dict
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 # Inherit URL from base CrawlRequest, add crawl_articles
 class CrawlRequest(CrawlRequest):
-    crawl_articles: Optional[bool] = False
+    crawl_articles: Optional[bool] = False  # Optional parameter, default False
 
 
 @router.post("/crawl", response_model=CrawlResponse, status_code=200)
@@ -93,17 +94,7 @@ async def crawl_endpoint(crawl_request: CrawlRequest, db: Session = Depends(get_
                 status_code=400, detail="Failed to extract article URLs from listing page.")
 
 
-def update_article_in_db(db: Session, existing_article: ArticleDB, new_article_data: dict):
-    """
-    Updates an existing article in the database with new data.
-    """
-    existing_article.headline = new_article_data["headline"]
-    existing_article.article_text = new_article_data["article_text"]
-    existing_article.publication_date = new_article_data["publication_date"]
-    existing_article.author = new_article_data["author"]
-    existing_article.category = new_article_data["category"]
-
-
+# reset database
 @router.post("/reset_db", response_model=MessageResponse, status_code=200)
 async def reset_database(db: Session = Depends(get_db)):
     """
@@ -119,3 +110,15 @@ async def reset_database(db: Session = Depends(get_db)):
         db.rollback()  # Rollback in case of error
         raise HTTPException(
             status_code=500, detail="Failed to reset database.")
+
+
+def update_article_in_db(db: Session, existing_article: ArticleDB, new_article_data: Dict):
+    """
+    Updates an existing article in the database with new data.
+    """
+    existing_article.headline = new_article_data["headline"]
+    existing_article.article_text = new_article_data["article_text"]
+    existing_article.publication_date = new_article_data["publication_date"]
+    existing_article.author = new_article_data["author"]
+    existing_article.category = new_article_data["category"]
+    # Do NOT update created_at (keep original creation timestamp)
