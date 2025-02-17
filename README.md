@@ -10,9 +10,12 @@
 
 **NewsPeeking API** is a RESTful API built with FastAPI that allows you to crawl news websites, extract article data, and classify news articles using Natural Language Processing (NLP) techniques. It's designed to be modular, configurable, and easy to use for developers who need to programmatically access and analyze news content.
 
+<img src="docs/screenshot-swagger.png" alt="Screenshot" width="70%" />
+
+
 ## ✨ Key Features
 
-*   **Web Crawling:** Efficiently crawls news websites using BeautifulSoup4 and `requests`.
+*   **Web Crawling:** Efficiently crawls news websites using `BeautifulSoup4` and `requests`.
 *   **Article Extraction:** Extracts key information from news articles:
     *   📰 **Headline**
     *   📝 **Article Text**

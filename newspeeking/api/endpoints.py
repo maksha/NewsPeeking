@@ -6,7 +6,7 @@ import logging
 
 # Import MessageResponse
 from newspeeking.api.schemas import CrawlRequest, CrawlResponse, ArticleResponse, MessageResponse
-from newspeeking.crawler.crawler import crawl_website, crawl_articles_from_listing_page
+from newspeeking.crawler.crawler import crawl_website, extract_article_urls_from_listing_page
 from newspeeking.db.database import get_db, Session, ArticleDB
 from typing import Dict
 
