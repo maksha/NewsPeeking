@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+beautifulsoup4
+nltk
+validators
+sqlalchemy
+python-dateutil
+PyYAML

@@ -1,0 +1,49 @@
+# NewsPeeking Configuration File
+
+database_url: "sqlite:///./news_articles.db"
+rate_limit_delay: 1
+categories:
+  Technology:
+    - technology
+    - tech
+    - innovation
+    - AI
+    - software
+    - hardware
+    - internet
+  Politics:
+    - politics
+    - government
+    - election
+    - president
+    - parliament
+    - political
+  Business:
+    - business
+    - economy
+    - market
+    - finance
+    - stock
+    - investment
+    - company
+  Sports:
+    - sports
+    - football
+    - basketball
+    - tennis
+    - game
+    - athlete
+    - team
+  World News:
+    - world
+    - international
+    - global
+    - country
+    - nation
+    - conflict
+    - diplomacy
+  General:
+    - news
+    - article
+    - report
+    - story
