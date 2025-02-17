@@ -39,7 +39,7 @@
     ```json
     {
       "url": "https://www.example-news-website.com/",
-      "crawl_articles": true  // Optional: Set to true to crawl and store articles, default is false (list URLs)
+      "crawl_articles": false
     }
     ```
     *   `url` (string, required): The URL of the news website (listing page or article page).
