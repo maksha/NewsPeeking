@@ -20,3 +20,7 @@ class ArticleResponse(BaseModel):
 class CrawlResponse(BaseModel):
     message: str
     articles_crawled: int = 0
+
+
+class MessageResponse(BaseModel):
+    message: str

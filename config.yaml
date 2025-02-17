@@ -1,49 +1,74 @@
-# NewsPeeking Configuration File
+default:
+  database_url: "sqlite:///./news_articles.db"
+  rate_limit_delay: 1
+  categories:
+    Technology:
+      - technology
+      - tech
+      - innovation
+      - AI
+      - software
+      - hardware
+      - internet
+    Politics:
+      - politics
+      - government
+      - election
+      - president
+      - parliament
+      - political
+    Business:
+      - business
+      - economy
+      - market
+      - finance
+      - stock
+      - investment
+      - company
+    Sports:
+      - sports
+      - football
+      - basketball
+      - tennis
+      - game
+      - athlete
+      - team
+    World News:
+      - world
+      - international
+      - global
+      - country
+      - nation
+      - conflict
+      - diplomacy
+    General:
+      - news
+      - article
+      - report
+      - story
 
-database_url: "sqlite:///./news_articles.db"
-rate_limit_delay: 1
-categories:
-  Technology:
-    - technology
-    - tech
-    - innovation
-    - AI
-    - software
-    - hardware
-    - internet
-  Politics:
-    - politics
-    - government
-    - election
-    - president
-    - parliament
-    - political
-  Business:
-    - business
-    - economy
-    - market
-    - finance
-    - stock
-    - investment
-    - company
-  Sports:
-    - sports
-    - football
-    - basketball
-    - tennis
-    - game
-    - athlete
-    - team
-  World News:
-    - world
-    - international
-    - global
-    - country
-    - nation
-    - conflict
-    - diplomacy
-  General:
-    - news
-    - article
-    - report
-    - story
+websites:
+  nytimes.com:
+    listing_page:
+      article_link_selectors:
+        - "section[aria-label='Editor’s Picks'] a"
+        - "li > div > a" # Catch the first article inside a list
+        - "div[data-testid='block-story-heading'] a" # Generic
+      url_pattern_inclusion: "/(briefing|international|us|politics|business|technology|science|health|sports|arts|style)/" # Example: NYTimes article URL paths
+    article_page:
+      headline_selector: "h1[class*='css-']" # Example: Adapt based on NYTimes article page inspection
+      article_text_selector: "p[class*='css-']" # Example: Adapt based on NYTimes article page inspection
+      publication_date_selector: "time[class*='css-']" # Example: Adapt based on NYTimes article page inspection
+      author_selector: "a[rel='author'][class*='css-']" # Example: Adapt based on NYTimes article page inspection
+  inet.detik.com:
+    listing_page:
+      article_link_selectors:
+        - "a.media__link" # Targets article links with the media__link class
+        - "article a" # Targets links inside <article> elements
+        - "div.list-content__item a" # For use in listing page
+      url_pattern_inclusion: "/d-" # Example: detik.com article URL paths
+    article_page:
+      headline_selector: "h1.title" # Example: Adapt based on detik.com article page inspection
+      article_text_selector: "div.detail__body-text p" # Example: Adapt based on detik.com article page inspection
+      publication_date_selector: "div.detail__date" # Example: Adapt based on detik.com article page inspection
+      author_selector: "div.detail__author" # Example: Adapt based on detik.com article page inspection

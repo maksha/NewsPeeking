@@ -26,4 +26,4 @@ def classify_article(article_text: str, categories: Dict[str, List[str]]) -> str
         for keyword in keywords:
             if keyword.lower() in filtered_tokens:
                 return category
-    return "General"
+        return "General"
