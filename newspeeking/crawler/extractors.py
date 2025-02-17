@@ -39,6 +39,6 @@ def extract_article_data(url: str, html_content: str) -> dict:
     return {
         "headline": headline,
         "article_text": article_text,
-        "publication_date": publication_date.isoformat() if publication_date else None,
+        "publication_date": publication_date,
         "author": author
     }
