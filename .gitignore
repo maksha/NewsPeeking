@@ -4,3 +4,4 @@ __pycache__/
 .env
 setup.sh
 news_articles.db
+coba.py
